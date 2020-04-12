@@ -11,17 +11,28 @@
     "cdk": "cdk"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.32.1",
-    "@types/jest": "^24.0.22",
-    "@types/node": "10.17.5",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "aws-cdk": "1.32.1",
-    "ts-node": "^8.1.0",
-    "typescript": "~3.7.2"
+    "@aws-cdk/assert": "1.32.2",
+    "@types/jest": "^25.2.1",
+    "@types/node": "13.11.1",
+    "jest": "^25.3.0",
+    "ts-jest": "^25.3.1",
+    "aws-cdk": "1.32.2",
+    "ts-node": "^8.8.2",
+    "typescript": "~3.8.3"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.32.1",
+    "@aws-cdk/aws-cloudtrail": "^1.32.2",
+    "@aws-cdk/aws-cloudwatch": "^1.32.2",
+    "@aws-cdk/aws-config": "^1.32.2",
+    "@aws-cdk/aws-ec2": "^1.32.2",
+    "@aws-cdk/aws-iam": "^1.32.2",
+    "@aws-cdk/aws-logs": "^1.32.2",
+    "@aws-cdk/aws-s3": "^1.32.2",
+    "@aws-cdk/aws-s3-assets": "^1.32.2",
+    "@aws-cdk/aws-servicecatalog": "^1.32.2",
+    "@aws-cdk/core": "1.32.2",
+    "@mobileposse/auto-delete-bucket": "^1.28.0",
+    "cdk-ssm-document": "^1.0.2",
     "source-map-support": "^0.5.16"
   }
 }

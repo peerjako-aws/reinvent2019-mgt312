@@ -1,0 +1,55 @@
+---
+schemaVersion: "0.3"
+description: "Updates AMI with Linux distribution packages and installs Nginx software"
+assumeRole: "{{AutomationAssumeRole}}"
+parameters:
+  InstanceId:
+    type: String
+    description: ID of the Instance.
+  AutomationAssumeRole:
+    type: String
+    description: "(Optional) The ARN of the role that allows Automation to perform the actions on your behalf."
+    default: ""
+mainSteps:
+  - name: "updateOSSoftware"
+    action: "aws:runCommand"
+    maxAttempts: 3
+    timeoutSeconds: 3600
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      InstanceIds:
+      - "{{InstanceId}}"
+      CloudWatchOutputConfig:
+        CloudWatchOutputEnabled: "true"
+      Parameters:
+        commands: 
+          - |
+            sudo yum update -y
+  - name: "InstallNginx"
+    action: "aws:runCommand"
+    maxAttempts: 3
+    timeoutSeconds: 300
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      InstanceIds:
+      - "{{InstanceId}}"
+      CloudWatchOutputConfig:
+        CloudWatchOutputEnabled: "true"
+      Parameters:
+        commands:
+          - |
+            sudo amazon-linux-extras install nginx1 -y
+            sudo service nginx start
+  - name: "TestInstall"
+    action: "aws:runCommand"
+    maxAttempts: 3
+    timeoutSeconds: 3600
+    onFailure: "Abort"
+    inputs:
+      DocumentName: "AWS-RunShellScript"
+      InstanceIds:
+      - "{{InstanceId}}"
+      Parameters:
+        commands:
+          - |
+            curl localhost
